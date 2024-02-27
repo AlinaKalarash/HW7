@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.util.Scanner;
 
-public class Main {
+public class DatabaseInitService {
+
+
     public static void main(String[] args) throws FileNotFoundException {
 
         File file = new File("src/main/resources/sql/init_db.sql");

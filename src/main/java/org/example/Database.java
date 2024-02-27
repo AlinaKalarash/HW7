@@ -8,14 +8,16 @@ public class Database {
     private static Connection connection;
 
     private Database() {
-        String url = PropReader.getConnectionUrl();
+        String jdbcUrl = "jdbc:postgresql://localhost:32768/ladatabase";
+        String username = "postgres";
+        String password = "123";
 
         try {
-            connection = DriverManager.getConnection(url);
+            connection = DriverManager.getConnection(jdbcUrl, username, password);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Connecting uncreateble");
+            throw new RuntimeException(e);
         }
+        System.out.println("Connected yupi");
     }
 
     public static Database getInstance() { return INSTANCE;}
