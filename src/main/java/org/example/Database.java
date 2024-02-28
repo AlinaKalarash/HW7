@@ -1,8 +1,7 @@
 package org.example;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import org.example.service.*;
+
 import java.sql.*;
 
 public class Database {
@@ -34,20 +33,7 @@ public class Database {
         }
     }
 
-//    public static void executeResult(String query) {
-//        try(Statement statement = connection.createStatement()) {
-//            ResultSet resultSet = statement.executeQuery(query);
-//            while(resultSet.next()) {
-//                TestData td = new TestData(resultSet.getInt("id"), resultSet.getString("name"));
-//                System.out.println("postgres ------>>>> " + td.toString());
-//            }
-//        } catch(SQLException e) {
-//            System.out.println(String.format("Exception. Reason: %s", e.getMessage()));
-//            throw new RuntimeException("Can not run query.");
-//        }
-//    }
-
-    public static void executeResult(String query) {
+    public static void maxProjectCountClientResult(String query) {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             while(resultSet.next()) {
@@ -60,17 +46,57 @@ public class Database {
         }
     }
 
-//public void execute(String fileName) {
-//    try(Statement statement = connection.createStatement()) {
-//        String content = new String(Files.readAllBytes(Paths.get(fileName)));
-//        statement.execute(content);
-//    } catch(SQLException e) {
-//        System.out.println(String.format("Exception. Reason: %s", e.getMessage()));
-//        throw new RuntimeException("Can not run query.");
-//    } catch(IOException e) {
-//        throw new RuntimeException(e);
-//    }
-//}
+    public static void longestProjectResult(String query) {
+        try(Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                LongestProject longestProject = new LongestProject(resultSet.getInt("id"), resultSet.getInt("duration"));
+                System.out.println("postgres ------>>>> " + longestProject.toString());
+            }
+        } catch(SQLException e) {
+            System.out.println(String.format("Exception. Reason: %s", e.getMessage()));
+            throw new RuntimeException("Can not run query.");
+        }
+    }
+
+    public static void maxSalaryWorkerResult(String query) {
+        try(Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                MaxSalaryWorker maxSalaryWorker = new MaxSalaryWorker(resultSet.getString("name"), resultSet.getInt("salary"));
+                System.out.println("postgres ------>>>> " + maxSalaryWorker.toString());
+            }
+        } catch(SQLException e) {
+            System.out.println(String.format("Exception. Reason: %s", e.getMessage()));
+            throw new RuntimeException("Can not run query.");
+        }
+    }
+
+    public static void printProjectPricesResult(String query) {
+        try(Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                PrintProjectPrices printProjectPrices = new PrintProjectPrices(resultSet.getInt("id"), resultSet.getInt("project_cost"));
+                System.out.println("postgres ------>>>> " + printProjectPrices.toString());
+            }
+        } catch(SQLException e) {
+            System.out.println(String.format("Exception. Reason: %s", e.getMessage()));
+            throw new RuntimeException("Can not run query.");
+        }
+    }
+
+        public static void youngestEldestWorkersResult(String query) {
+        try(Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                YoungestEldestWorkers youngestEldestWorkers = new YoungestEldestWorkers(resultSet.getString("type"), resultSet.getString("name"), resultSet.getInt("birthday"));
+                System.out.println("postgres ------>>>> " + youngestEldestWorkers.toString());
+            }
+        } catch(SQLException e) {
+            System.out.println(String.format("Exception. Reason: %s", e.getMessage()));
+            throw new RuntimeException("Can not run query.");
+        }
+    }
 
     public void closeConnection() {
         try {

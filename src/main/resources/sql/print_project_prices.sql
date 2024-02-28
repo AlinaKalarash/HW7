@@ -1,13 +1,14 @@
 SELECT 
     project.id,
-    (DATEDIFF('MONTH', project.start_date, project.finish_date) * SUM(worker.salary)) AS project_cost
-FROM 
+    (EXTRACT(MONTH FROM project.finish_date) - EXTRACT(MONTH FROM project.start_date)) * SUM(worker.salary) AS project_cost
+FROM
     project
-JOIN 
+JOIN
     project_worker ON project.id = project_worker.project_id
-JOIN 
+JOIN
     worker ON project_worker.worker_id = worker.id
-GROUP BY 
+GROUP BY
     project.id, project.start_date, project.finish_date
-ORDER BY 
+ORDER BY
     project_cost DESC;
+
