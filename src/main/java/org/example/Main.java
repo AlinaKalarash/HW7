@@ -27,7 +27,7 @@ public class Main {
 
 
 
-        database.executeResult("SELECT * FROM mytable");
+//        database.executeResult("SELECT * FROM mytable");
 
         System.out.println("----------------- \n");
         try {
@@ -35,8 +35,12 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Error");
         }
+//        TestData td = new TestData(resultSet.getInt("id"), resultSet.getString("name"));
+        TestData td = null;
 
-        database.executeResult("SELECT * FROM mytable");
+
+
+//        database.executeResult("SELECT * FROM mytable");
 
         Connection conn = Database.getInstance().getConnection();
         System.out.println("\n\n\n----------------- \nThe connection: " + conn + "\n-----------------");

@@ -11,7 +11,6 @@ public class DatabaseInitService {
     public static void main(String[] args) throws FileNotFoundException {
 
         File file = new File("src/main/resources/sql/init_db.sql");
-        System.out.println("It's reader: "+file);
 
         Scanner scanner = new Scanner(file);
 
@@ -29,7 +28,7 @@ public class DatabaseInitService {
 
 
 
-        database.executeResult("SELECT * FROM mytable");
+//        database.executeResult("SELECT * FROM mytable");
 
         System.out.println("----------------- \n");
         try {
@@ -38,7 +37,7 @@ public class DatabaseInitService {
             System.out.println("Error");
         }
 
-        database.executeResult("SELECT * FROM mytable");
+//        database.executeResult("SELECT * FROM mytable");
 
         Connection conn = Database.getInstance().getConnection();
         System.out.println("\n\n\n----------------- \nThe connection: " + conn + "\n-----------------");
