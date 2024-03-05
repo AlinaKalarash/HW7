@@ -32,6 +32,58 @@ public class Database {
             throw new RuntimeException("Cannot run query");
         }
     }
+    public static int executeUpdate(long id, String name, int birthday, String level, int salary) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO worker (ID, NAME, BIRTHDAY, LEVEL, SALARY) VALUES (?, ?, ?, ?, ?)")) {
+            preparedStatement.setLong(1, id);
+            preparedStatement.setString(2, name);
+            preparedStatement.setInt(3, birthday);
+            preparedStatement.setString(4, level);
+            preparedStatement.setInt(5, salary);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot run query");
+        }
+    }
+    public static int executeUpdate(long id, int clientId) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO client (ID, CLIENT_ID) VALUES (?, ?)")) {
+            preparedStatement.setLong(1, id);
+            preparedStatement.setInt(2, clientId);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot run query");
+        }
+    }
+
+    public static int executeUpdate(long id, int clientId, String  start, String  finish) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO project (ID, CLIENT_ID, START_DATE, FINISH_DATE) VALUES (?, ?, ?, ?)")) {
+            preparedStatement.setLong(1, id);
+            preparedStatement.setInt(2, clientId);
+            preparedStatement.setDate(3, Date.valueOf(start));
+            preparedStatement.setDate(4, Date.valueOf(finish));
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot run query");
+        }
+    }
+
+    public static int executeUpdate(long projectId, long workerId) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO project_worker (PROJECT_ID, WORKER_ID) VALUES (?, ?)")) {
+            preparedStatement.setLong(1, projectId);
+            preparedStatement.setLong(2, workerId);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot run query");
+        }
+    }
+////Prepare
+//String sqlTemplate = "SELECT name FROM people WHERE name LIKE ?";
+//PreparedStatement queryStatement = connection.prepareStatement(sqlTemplate);
+//
+////Set params
+//queryStatement.setString(1, query);
+//
+////Execute
+//ResultSet searchResult = queryStatement.executeQuery();
 
     public static void maxProjectCountClientResult(String query) {
         try(Statement statement = connection.createStatement()) {
