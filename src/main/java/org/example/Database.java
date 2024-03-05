@@ -75,15 +75,7 @@ public class Database {
             throw new RuntimeException("Cannot run query");
         }
     }
-////Prepare
-//String sqlTemplate = "SELECT name FROM people WHERE name LIKE ?";
-//PreparedStatement queryStatement = connection.prepareStatement(sqlTemplate);
-//
-////Set params
-//queryStatement.setString(1, query);
-//
-////Execute
-//ResultSet searchResult = queryStatement.executeQuery();
+
 
     public static void maxProjectCountClientResult(String query) {
         try(Statement statement = connection.createStatement()) {
